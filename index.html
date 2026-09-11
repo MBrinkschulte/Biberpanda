@@ -1,171 +1,26 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EhrenSoftware</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #d8f3dc, #e7f5ff);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 700px;
-            width: 100%;
-            text-align: center;
-            background: white;
-            border-radius: 28px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            color: #2d6a4f;
-            margin: 0 0 10px 0;
-            font-size: 3em;
-        }
-
-        .subtitle {
-            color: #555;
-            margin-bottom: 35px;
-            font-size: 1.2em;
-        }
-
-        .cards {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-            padding: 25px;
-            border-radius: 20px;
-            text-align: left;
-            text-decoration: none;
-            color: #222;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-        }
-
-        .date-card {
-            background: #fff3bf;
-        }
-
-        .clock-card {
-            background: #d0ebff;
-        }
-
-        .icon {
-            font-size: 50px;
-            min-width: 60px;
-            text-align: center;
-        }
-
-        .title {
-            font-size: 1.5em;
-            font-weight: bold;
-            line-height: 1.2;
-        }
-
-        .description {
-            color: #555;
-            margin-top: 6px;
-            line-height: 1.4;
-        }
-
-        .footer {
-            margin-top: 30px;
-            color: #888;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 500px) {
-            .container {
-                padding: 28px 20px;
-            }
-
-            h1 {
-                font-size: 2.3em;
-            }
-
-            .card {
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .icon {
-                font-size: 42px;
-                min-width: 48px;
-            }
-
-            .title {
-                font-size: 1.35em;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EhrenSoftware</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#d8f3dc,#e7f5ff);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}.container{max-width:700px;width:100%;text-align:center;background:#fff;border-radius:28px;padding:40px;box-shadow:0 10px 30px rgba(0,0,0,.1)}h1{color:#2d6a4f;margin:0 0 10px;font-size:3em}.subtitle{color:#555;margin-bottom:35px;font-size:1.2em}.cards{display:flex;flex-direction:column;gap:20px}.card{display:flex;align-items:center;gap:22px;padding:25px;border-radius:20px;text-align:left;text-decoration:none;color:#222;transition:transform .2s ease,box-shadow .2s ease}.card:hover{transform:scale(1.02);box-shadow:0 6px 16px rgba(0,0,0,.12)}.date-card{background:#fff3bf}.clock-card{background:#d0ebff}.icon{font-size:50px;min-width:60px;text-align:center}.title{font-size:1.5em;font-weight:bold;line-height:1.2}.description{color:#555;margin-top:6px;line-height:1.4}.footer{margin-top:30px;color:#888;font-size:.9em}@media(max-width:500px){.container{padding:28px 20px}h1{font-size:2.3em}.card{padding:20px;gap:15px}.icon{font-size:42px;min-width:48px}.title{font-size:1.35em}}
+</style>
 </head>
-
 <body>
-
 <div class="container">
-
-    <h1>🏡 EhrenSoftware</h1>
-
-    <div class="subtitle">
-        Lernsoftware für Biber 🦫 und Pandas 🐼
-    </div>
-
-    <div class="cards">
-
-        Datum_Detektive_v1_5.html
-            <div class="icon">📅</div>
-
-            <div>
-                <div class="title">Datum-Detektive</div>
-                <div class="description">
-                    Wochentage, Monate und Datumsangaben spielerisch lernen.
-                </div>
-            </div>
-        </a>
-
-        Uhr_Detektive_v2_2.html
-            <div class="icon">🕒</div>
-
-            <div>
-                <div class="title">Uhrzeit-Detektive</div>
-                <div class="description">
-                    Die Uhr lesen lernen und Uhrzeiten üben.
-                </div>
-            </div>
-        </a>
-
-    </div>
-
-    <div class="footer">
-        Entwickelt mit ❤️ in Köln-Ehrenfeld für kleine Biber 🦫 und Pandas 🐼
-    </div>
-
+<h1>🏡 EhrenSoftware</h1>
+<div class="subtitle">Lernsoftware für Biber 🦫 und Pandas 🐼</div>
+<div class="cards">
+<a class="card date-card" href="Datum_Detektive_v1_5.html">
+<div class="icon">📅</div><div><div class="title">Datum-Detektive</div><div class="description">Wochentage, Monate und Datumsangaben spielerisch lernen.</div></div>
+</a>
+<a class="card clock-card" href="Uhr_Detektive_v2_2.html">
+<div class="icon">🕒</div><div><div class="title">Uhrzeit-Detektive</div><div class="description">Die Uhr lesen lernen und Uhrzeiten üben.</div></div>
+</a>
 </div>
-
+<div class="footer">Entwickelt mit ❤️ in Köln-Ehrenfeld für kleine Biber 🦫 und Pandas 🐼</div>
+</div>
 </body>
 </html>
