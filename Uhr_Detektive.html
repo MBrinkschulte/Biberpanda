@@ -1,181 +1,99 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Uhr-Detektive v3.1n</title>
-<style>
-:root{--ink:#253047;--muted:#6d7585;--bg:#f7f8fb;--line:#dfe3e8;--accent:#5367d8;--hour:#3c5a9a;--minute:#e45d68}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}button{font:inherit;color:inherit;cursor:pointer}.app{max-width:1180px;margin:auto;padding:16px}.hero{display:flex;justify-content:space-between;align-items:center}h1{margin:0;font-size:clamp(28px,4vw,46px)}.sub{color:var(--muted)}.score{background:#fff6c7;border:2px solid #ecd15b;border-radius:19px;padding:9px 15px;font-size:20px;font-weight:900}.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:13px 0}.tab{min-height:48px;border:2px solid var(--line);background:#fff;border-radius:15px;font-weight:850}.tab.active{border-color:var(--accent);background:#eef0ff}.layout{display:grid;grid-template-columns:350px 1fr;gap:14px;align-items:start}.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 8px 25px #1f2a4410}.panel{padding:16px}.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--muted)}#task{font-size:25px;font-weight:950;margin:7px 0 4px}.hint{font-size:13px;color:var(--muted)}#feedback{margin-top:11px;padding:11px;border-radius:14px;background:#f3f5f8;min-height:48px}.primary{width:100%;min-height:46px;margin-top:9px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-weight:900}.legend{display:grid;gap:8px;margin-top:12px}.legendbox{padding:10px;border-radius:14px;background:#f6f7f9;font-size:13px}.friend{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-size:18px;margin-right:6px}.hfriend{background:#dce7ff}.mfriend{background:#ffe0e3}
-.clockcard{padding:13px;display:flex;flex-direction:column;align-items:center}.clockwrap{width:min(55vw,550px);max-width:100%;aspect-ratio:1/1;position:relative}.clock{position:absolute;inset:0;border-radius:50%;background:#fff;border:8px solid #29344c;box-shadow:inset 0 0 0 4px #edf0f4}
-.tick{position:absolute;left:50%;top:50%;width:2px;height:7px;background:#b7bdc8;transform-origin:50% 0;z-index:1}.tick.five{width:4px;height:14px;background:#596273}
-.hournum,.minnum{position:absolute;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);z-index:3;font-weight:950;pointer-events:auto;border:0;background:transparent;padding:0}.hournum{width:42px;height:42px;font-size:clamp(18px,2.1vw,28px);color:var(--hour)}.minnum{width:32px;height:20px;font-size:clamp(9px,1.1vw,13px);color:#d44f5b}
-.hand{position:absolute;left:50%;top:50%;border-radius:10px;transform-origin:0 50%;z-index:6;cursor:grab;touch-action:none;overflow:visible}
-.hand::after{content:"";position:absolute;left:-12px;right:-12px;top:50%;height:54px;transform:translateY(-50%);background:transparent;border-radius:28px;pointer-events:auto;touch-action:none}
-.hand:active{cursor:grabbing}.hourhand{height:9px;width:29%;background:var(--hour)}.minutehand{height:6px;width:39%;background:var(--minute)}.center{position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px;border-radius:50%;background:#26334b;z-index:9}
-.handtag{position:absolute;z-index:8;display:flex;align-items:center;justify-content:center;gap:4px;padding:9px 12px;min-width:74px;min-height:42px;border-radius:18px;font-size:11px;font-weight:950;white-space:nowrap;pointer-events:auto;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
-.handtag:active{cursor:grabbing}.htag{background:#dce7ff;color:#304d88}.mtag{background:#ffe0e3;color:#b83f4a}
-.digital{margin-top:9px;font-size:31px;font-weight:950}.spoken{font-size:17px;font-weight:900;text-align:center}.controls{display:flex;gap:7px;margin-top:8px}.controls button{min-height:40px;border:2px solid var(--line);border-radius:12px;background:#fff;font-weight:850;padding:0 12px}.learnpanel{width:100%;margin-top:9px;display:grid;grid-template-columns:1fr 1fr;gap:7px}.learnbox{border-radius:13px;padding:9px;text-align:center;font-size:12px;font-weight:850}.hourbox{background:#edf2ff}.minbox{background:#fff0f1}
-.answergrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.selectbox{padding:10px;border-radius:13px;background:#f5f6f8;text-align:center}.stepper{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:5px}.stepper button{width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:#fff;font-size:19px}.value{min-width:43px;font-size:23px;font-weight:950}
-.confetti{position:fixed;top:-20px;width:10px;height:16px;border-radius:3px;pointer-events:none;z-index:9999;animation:fall 1.5s ease-out forwards}@keyframes fall{to{transform:translateY(105vh) rotate(720deg);opacity:0}}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.clockwrap{width:min(88vw,550px)}}@media(max-width:620px){.app{padding:9px}.tabs{grid-template-columns:1fr}.learnpanel,.answergrid{grid-template-columns:1fr}}
-
-.digitalanswer{display:flex!important;flex-direction:row;align-items:center;justify-content:center;gap:5px;margin-top:10px;padding:8px 7px;border-radius:15px;background:#f5f6f8}
-.digitcontrol{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:4px}
-.digitbtn{width:46px;height:46px;border:2px solid var(--line);border-radius:13px;background:#fff;font-size:24px;font-weight:950;line-height:1;touch-action:manipulation;display:flex;align-items:center;justify-content:center}
-.digitbtn:active{transform:scale(.97);background:#eef0ff}
-.digitvalue{min-width:56px;height:50px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:30px;font-weight:950;font-variant-numeric:tabular-nums;background:#fff;border:2px solid #e4e7ed;border-radius:13px}
-.colon{font-size:31px;font-weight:950;line-height:1}
-
-.hourvalue{color:var(--hour)}
-.minutevalue{color:var(--minute)}
-
-/* Two original mascot helpers: visible reminders, not copied characters. */
-.mascotstage{width:100%;display:flex;justify-content:center;gap:16px;align-items:flex-end;margin:8px 0 2px}
-.mascot{position:relative;display:flex;align-items:center;gap:7px;padding:7px 11px;border-radius:18px;font-weight:900;font-size:12px;box-shadow:0 3px 10px #1f2a4412}
-.mascot .face{font-size:27px;line-height:1}
-.mascot.hourmascot{background:#e8efff;color:#304d88}
-.mascot.minutemascot{background:#ffe8ea;color:#b83f4a}
-.mascot small{display:block;font-size:10px;font-weight:800;opacity:.8}
-
-.friendcolor{font-weight:900}
-.hourfriendcolor{background:#e8efff;color:#304d88}
-.minutefriendcolor{background:#ffe8ea;color:#b83f4a}
-.frienddesc{font-size:12px;font-weight:800}
-
-.friendcolor{padding:13px 14px!important;min-height:72px;font-size:15px!important}
-.friendcolor .friend{width:42px!important;height:42px!important;font-size:27px!important;margin-right:9px!important}
-.friendcolor b{font-size:15px}
-.friendcolor .frienddesc{font-size:13px!important;line-height:1.35}
-
-.elapsedpaths{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
-.elapsedpaths circle,.elapsedpaths path{fill:none;stroke-linecap:round;pointer-events:none}
-#minutePassed{stroke:var(--minute);stroke-width:2.6;opacity:.48}
-#hourPassed{stroke:var(--hour);stroke-width:4.2;opacity:.50}
-
-.zf-title{font-size:18px;font-weight:950;margin-bottom:10px}
-.zf-list{display:flex;flex-direction:column;gap:8px}
-.zf-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:9px 11px;
-  border-radius:16px;
-}
-.zf-hour{background:#e8efff;color:#304d88}
-.zf-minute{background:#ffe8ea;color:#b83f4a}
-.zf-icon{
-  width:40px;
-  height:40px;
-  flex:0 0 40px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  line-height:1;
-}
-.zf-hour .zf-icon{background:#d7e4ff}
-.zf-minute .zf-icon{background:#ffd6da}
-.zf-copy{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:flex-start;
-  gap:2px;
-  min-width:0;
-}
-.zf-name{
-  font-size:15px;
-  line-height:1.15;
-  font-weight:950;
-  margin:0;
-  padding:0;
-  text-align:left;
-}
-.zf-desc{
-  font-size:12px;
-  line-height:1.15;
-  font-weight:800;
-  opacity:.9;
-  margin:0;
-  padding:0;
-  text-align:left;
-}
-
-.confetti{
-  position:fixed;
-  z-index:9999;
-  width:10px;
-  height:16px;
-  border-radius:3px;
-  pointer-events:none;
-  left:var(--x);
-  top:var(--y);
-  opacity:0;
-  animation:confettiBurst var(--dur) cubic-bezier(.15,.65,.3,1) forwards;
-  animation-delay:var(--delay);
-}
-.confetti.round{border-radius:50%;width:9px;height:9px}
-.confetti.ribbon{width:6px;height:20px;border-radius:5px}
-@keyframes confettiBurst{
-  0%{
-    opacity:1;
-    transform:translate(-50%,-50%) rotate(0deg) scale(.7);
-  }
-  28%{
-    opacity:1;
-    transform:
-      translate(calc(-50% + var(--dx1)), calc(-50% + var(--dy1)))
-      rotate(var(--r1)) scale(1);
-  }
-  100%{
-    opacity:0;
-    transform:
-      translate(calc(-50% + var(--dx2)), calc(-50% + var(--dy2)))
-      rotate(var(--r2)) scale(.9);
-  }
-}
-</style></head><body><div class="app">
-<div class="hero"><div><h1>🕐 Uhr-Detektive</h1><div class="sub">Stunden · Minuten · Uhrzeit</div></div><div class="score">⭐ <span id="score">0</span></div></div>
-<div class="tabs"><button class="tab active" data-mode="set">🕰️ Uhrzeit einstellen</button><button class="tab" data-mode="read">🔎 Uhrzeit lesen</button></div>
-<div class="layout"><div>
-<div class="card panel"><div class="label">Deine Aufgabe</div><div id="task">Entdecke die Uhr.</div><div class="hint" id="hint">Tippe auf eine Zahl im Zifferblatt.</div><div id="feedback" style="display:none"></div>
-<div id="answers" class="digitalanswer" aria-label="Uhrzeit einstellen">
-  <div class="digitcontrol hourcontrol">
-    <button id="hm" class="digitbtn" aria-label="Stunde verringern">−</button>
-    <div class="digitvalue hourvalue" id="hv">12</div>
-    <button id="hp" class="digitbtn" aria-label="Stunde erhöhen">+</button>
-  </div>
-  <div class="colon">:</div>
-  <div class="digitcontrol minutecontrol">
-    <button id="mm" class="digitbtn" aria-label="Minuten verringern">−</button>
-    <div class="digitvalue minutevalue" id="mv">00</div>
-    <button id="mp" class="digitbtn" aria-label="Minuten erhöhen">+</button>
-  </div>
-</div>
-<button class="primary" id="check"   style="display:none">Prüfen ✓</button><button class="primary" id="nextTask">Nächste Aufgabe →</button></div>
-<div class="card panel" style="margin-top:14px">
-  <div class="zf-title">Die zwei Zeiger-Freunde</div>
-  <div class="zf-list">
-    <div class="zf-row zf-hour">
-      <div class="zf-icon">🐢</div>
-      <div class="zf-copy">
-        <div class="zf-name">Stunden-Freund</div>
-        <div class="zf-desc">kurzer blauer Zeiger</div>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport">
+    <title>Uhr-Detektive</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/uhr-detektive.css">
+  </head>
+  <body>
+    <a class="home-button" href="index.html">🏠 Startseite</a>
+    <div class="app">
+      <header class="game-header">
+        <div class="game-heading">
+          <h1 class="game-title">🕐 Uhr-Detektive</h1>
+          <div class="game-subtitle">Stunden · Minuten · Uhrzeit</div>
+        </div>
+        <div class="game-score" aria-label="Punktestand">⭐ <span id="score">0</span>
+        </div>
+      </header>
+      <div class="tabs">
+        <button class="tab active" data-mode="set">🕰️ Uhrzeit einstellen</button>
+        <button class="tab" data-mode="read">🔎 Uhrzeit lesen</button>
+      </div>
+      <div class="layout">
+        <div>
+          <div class="card panel">
+            <div class="label">Deine Aufgabe</div>
+            <div id="task">Entdecke die Uhr.</div>
+            <div class="hint" id="hint">Tippe auf eine Zahl im Zifferblatt.</div>
+            <div id="feedback" style="display:none"></div>
+            <div aria-label="Uhrzeit einstellen" class="digitalanswer" id="answers">
+              <div class="digitcontrol hourcontrol">
+                <button aria-label="Stunde verringern" class="digitbtn" id="hm">−</button>
+                <div class="digitvalue hourvalue" id="hv">12</div>
+                <button aria-label="Stunde erhöhen" class="digitbtn" id="hp">+</button>
+              </div>
+              <div class="colon">:</div>
+              <div class="digitcontrol minutecontrol">
+                <button aria-label="Minuten verringern" class="digitbtn" id="mm">−</button>
+                <div class="digitvalue minutevalue" id="mv">00</div>
+                <button aria-label="Minuten erhöhen" class="digitbtn" id="mp">+</button>
+              </div>
+            </div>
+            <button class="primary" id="check"   style="display:none">Prüfen ✓</button>
+            <button class="primary" id="nextTask">Nächste Aufgabe →</button>
+          </div>
+          <div class="card panel" style="margin-top:14px">
+            <div class="zf-title">Die zwei Zeiger-Freunde</div>
+            <div class="zf-list">
+              <div class="zf-row zf-hour">
+                <div class="zf-icon">🐢</div>
+                <div class="zf-copy">
+                  <div class="zf-name">Stunden-Freund</div>
+                  <div class="zf-desc">kurzer blauer Zeiger</div>
+                </div>
+              </div>
+              <div class="zf-row zf-minute">
+                <div class="zf-icon">🐇</div>
+                <div class="zf-copy">
+                  <div class="zf-name">Minuten-Freund</div>
+                  <div class="zf-desc">langer roter Zeiger</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card clockcard">
+          <div class="clockwrap" id="clockwrap">
+            <div class="clock" id="clock">
+              <svg aria-hidden="true" class="elapsedpaths" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" id="minutePassed" pathLength="60" r="45.2" transform="rotate(-90 50 50)"></circle>
+                <path d="" id="hourPassed"></path>
+              </svg>
+              <div class="hand hourhand" id="hourHand"></div>
+              <div class="hand minutehand" id="minuteHand"></div>
+              <div class="center"></div>
+              <div class="handtag htag" id="htag">🐢 Stunde</div>
+              <div class="handtag mtag" id="mtag">🐇 Minuten</div>
+            </div>
+          </div>
+          <div class="digital" id="digital">08:00</div>
+          <div class="spoken" id="spoken">acht Uhr</div>
+          <div class="controls">
+            <button id="speak">🔊 Vorlesen</button>
+            <button id="random">🎲 Andere Uhrzeit</button>
+          </div>
+          <div id="dragHint" style="margin-top:8px;font-size:12px;color:var(--muted);font-weight:800">👆 Du kannst beide Zeiger mit dem Finger bewegen.</div>
+          <div class="learnpanel">
+            <div class="learnbox hourbox" id="hex">🐢 Kurzer Zeiger → 8 Uhr</div>
+            <div class="learnbox minbox" id="mex">🐇 Langer Zeiger → 12 = 00 Minuten</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="zf-row zf-minute">
-      <div class="zf-icon">🐇</div>
-      <div class="zf-copy">
-        <div class="zf-name">Minuten-Freund</div>
-        <div class="zf-desc">langer roter Zeiger</div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<div class="card clockcard"><div class="clockwrap" id="clockwrap"><div class="clock" id="clock"><svg class="elapsedpaths" viewBox="0 0 100 100" aria-hidden="true">
-<circle id="minutePassed" cx="50" cy="50" r="45.2" pathLength="60" transform="rotate(-90 50 50)"></circle>
-<path id="hourPassed" d=""></path>
-</svg><div class="hand hourhand" id="hourHand"></div><div class="hand minutehand" id="minuteHand"></div><div class="center"></div><div class="handtag htag" id="htag">🐢 Stunde</div><div class="handtag mtag" id="mtag">🐇 Minuten</div></div></div>
-<div class="digital" id="digital">08:00</div><div class="spoken" id="spoken">acht Uhr</div><div class="controls"><button id="speak">🔊 Vorlesen</button><button id="random">🎲 Andere Uhrzeit</button></div>
-<div id="dragHint" style="margin-top:8px;font-size:12px;color:var(--muted);font-weight:800">👆 Du kannst beide Zeiger mit dem Finger bewegen.</div><div class="learnpanel"><div class="learnbox hourbox" id="hex">🐢 Kurzer Zeiger → 8 Uhr</div><div class="learnbox minbox" id="mex">🐇 Langer Zeiger → 12 = 00 Minuten</div></div></div></div></div>
-<script>
+    <script>
 const $=s=>document.querySelector(s),clock=$('#clock');let mode='set',hour=12,minute=0,target={h:8,m:0},ah=8,am=0,score=0;
 const words=['zwölf','eins','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn','elf'];
 function polar(r,a){let q=(a-90)*Math.PI/180;return{x:50+r*Math.cos(q),y:50+r*Math.sin(q)}}
@@ -295,12 +213,13 @@ function pointerAngle(ev){
  return deg;
 }
 function startDrag(which,ev){
+ if(mode!=='set')return;
  dragging=which;
  if(ev.pointerId!==undefined) ev.currentTarget.setPointerCapture?.(ev.pointerId);
  ev.preventDefault();
 }
 function moveDrag(ev){
- if(!dragging)return;
+ if(!dragging||mode!=='set')return;
  let a=pointerAngle(ev);
  if(dragging==='minute'){
    let newM=(Math.round(a/30)*5)%60;
@@ -325,43 +244,15 @@ window.addEventListener('pointermove',moveDrag,{passive:false});
 window.addEventListener('pointerup',endDrag);
 window.addEventListener('pointercancel',endDrag);
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
-let dragging=null;
-function pointerAngle(ev){
- const r=clock.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
- let deg=Math.atan2(ev.clientY-cy,ev.clientX-cx)*180/Math.PI+90;
- if(deg<0)deg+=360;
- return deg;
-}
-function startDrag(which,ev){
- dragging=which;
- if(ev.pointerId!==undefined) ev.currentTarget.setPointerCapture?.(ev.pointerId);
- ev.preventDefault();
-}
-function moveDrag(ev){
- if(!dragging)return;
- let a=pointerAngle(ev);
- if(dragging==='minute'){
-   let newM=(Math.round(a/30)*5)%60;
-   let oldM=minute;
-   // When manually crossing 12, carry/borrow the hour.
-   if(oldM>=45 && newM<=10){hour++;if(hour>12)hour=1}
-   else if(oldM<=10 && newM>=45){hour--;if(hour<1)hour=12}
-   minute=newM;
- }else{
-   let h=Math.round(a/30);
-   if(h===0)h=12;
-   hour=h;
- }
- if(mode==='set'){ah=hour;am=minute;sync()}else render();
-}
-function endDrag(){dragging=null}
-$('#hourHand').addEventListener('pointerdown',e=>startDrag('hour',e));
-$('#minuteHand').addEventListener('pointerdown',e=>startDrag('minute',e));
-$('#htag').addEventListener('pointerdown',e=>startDrag('hour',e));
-$('#mtag').addEventListener('pointerdown',e=>startDrag('minute',e));
-window.addEventListener('pointermove',moveDrag,{passive:false});
-window.addEventListener('pointerup',endDrag);
-window.addEventListener('pointercancel',endDrag);
-document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');mode=b.dataset.mode;task()});
+document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+b.classList.add('active');
+mode=b.dataset.mode;
+dragging=null;
+clock.classList.toggle('clock-readonly',mode==='read');
+$('#dragHint').hidden=mode==='read';
+task()
+});
 $('#hm').onclick=()=>ch(-1,0);$('#hp').onclick=()=>ch(1,0);$('#mm').onclick=()=>ch(0,-5);$('#mp').onclick=()=>ch(0,5);$('#check').onclick=check;$('#nextTask').onclick=task;$('#speak').onclick=speak;$('#random').onclick=random;render();task();
-</script></body></html>
+</script>
+  </body>
+</html>
